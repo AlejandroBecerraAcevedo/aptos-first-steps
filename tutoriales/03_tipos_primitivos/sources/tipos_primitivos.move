@@ -1,7 +1,48 @@
 module aptosz3::tipos_primitivos {
     use std::debug::print;
+    use std::string::utf8;
 
-    fun practica() {
+
+    ///////////////////////////////////////////////////
+    /*            Ejercisio sesion #2                */
+    ///////////////////////////////////////////////////
+
+    // Declara 1 valor entero **constante** con cualquier valor que quieras.
+    const NUMERO : u64 = 100;
+    
+
+    fun practica() {        
+
+        // Declara 1 variable entera con cualquier valor que quieras.
+        let entero = 10;
+
+        // Imprime ambos numeros.
+        print(&utf8(b"Constante cualquier valor: "));
+        print(&NUMERO);
+        print(&utf8(b"Variable cualquier valor: "));
+        print(&entero);
+
+        // Declara una variable que compare si estos nmeros son iguales.
+        let compara = NUMERO == entero;
+        print(&utf8(b"Iguales: "));
+        print(&compara);
+
+        // Declara una variable que compare si el 1er nmero es mayor que el segundo.
+        let mayor = NUMERO > entero;
+        print(&utf8(b"Mayor que: "));
+        print(&mayor);
+
+        // Declara una variable que compare si las 2 comparaciones anteriores son verdaderas.
+        let compare_2_bolean = compara && mayor;
+        print(&utf8(b"compara 2 booleanos: "));
+        // Imprime el resultado de esta ultima variable.
+        print(&compare_2_bolean);
+
+        ///////////////////////////////////////////////////
+        /*            Continua la teoria                 */
+        ///////////////////////////////////////////////////
+
+
         // Enteros (Integers)
         let a = 1; // Cuando el tipo de dato no es especificado, el compilador asume u64.
         print(&a); // Resultado: [debug] 1
