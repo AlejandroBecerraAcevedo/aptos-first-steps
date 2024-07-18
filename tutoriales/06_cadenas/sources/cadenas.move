@@ -3,51 +3,53 @@ module aptosz3::cadenas {
     use std::string::{utf8, is_empty, append, append_utf8, insert};
     use aptos_std::string_utils::{to_string, debug_string};
 
+
+    /*
+        Reto
+
+        * Crea una cadena con un poema de 4 lineas **en una sola variable**. Puedes usar el siguiente como ejemplo:
+            ```
+            Te vi un punto y, flotando ante mis ojos,
+            la imagen de tus ojos se quedo,
+            como la mancha oscura orlada en fuego
+            que flota y ciega si se mira al sol.
+            ```
+            > :warning: Recuerda que el codigo de Move **no** puede tener acentos ni caracteres especiales.
+        * Ahora crea 4 variables, una por cada linea y concatenalas en una sola variable final.
+        * Imprime ambas variables.
+        * Responde: Cual de los dos metodos crees que es mejor y porque?
+    */
+
     fun practica() {
-        // Cadenas
+
+        let poema = utf8(b"");
         
-        // Bytes
-        let cadena_bytes = b"Hello World!";
-        print(&cadena_bytes); // Resultado: [debug] 0x48656c6c6f20576f726c6421
-        print(&utf8(cadena_bytes)); // Resultado: [debug] "Hello World!"
+        append(&mut poema, utf8(b"\nTe vi un punto y, flotando ante mis ojos,"));
+        append(&mut poema, utf8(b"\nla imagen de tus ojos se quedo,"));
+        append(&mut poema, utf8(b"\ncomo la mancha oscura orlada en fuego"));
+        append(&mut poema, utf8(b"\nque flota y ciega si se mira al sol."));
+
+        let poema_lines1 = utf8(b"\nTe vi un punto y, flotando ante mis ojos,");
+        let poema_lines2 = utf8(b"\nla imagen de tus ojos se quedo,");
+        let poema_lines3 = utf8(b"\ncomo la mancha oscura orlada en fuego");
+        let poema_lines4 = utf8(b"\nque flota y ciega si se mira al sol.");
+
+        let poema_lines = utf8(b"");
+
+        append(&mut poema_lines, poema_lines1);
+        append(&mut poema_lines, poema_lines2);
+        append(&mut poema_lines, poema_lines3);
+        append(&mut poema_lines, poema_lines4);
         
-        // Hex
-        let cadena_hexadecimal = x"48656C6C6F20576F726C6421";
-        print(&cadena_hexadecimal); // Resultado: [debug] 0x48656c6c6f20576f726c6421 Notas alguna similitud?
-        print(&utf8(cadena_hexadecimal)); // Resultdo: [debug] "Hello World!"
+        print(&poema); // Resultado: [debug] "poema
+        print(&poema_lines); // Resultado: [debug] "poema
 
-        // Operaciones
-        let cadena_vacia = b"";
-        let validacion = is_empty(&utf8(cadena_vacia)); // Validando si la cadena esta vacia
-        print(&validacion); // Resultdo: [debug] true
+        /*
+            Opino que es mejor de la primera manera, puesto que, aunque se usa el mismo procesamiento,
+            la seguunda manera utiliza mas espacio de memoria por la nuevas variables creadas y esto generaria
+            un costo adicional para el despliegue en blockchain.
+        */
 
-        let cadena_utf8 = utf8(cadena_vacia);
-        append_utf8(&mut cadena_utf8, b"Hola"); // Concatenando 2 cadenas utf8. Nota que pasamos una referencia mutable.
-        print(&cadena_utf8); // Resultado: [debug] "Hola"
-
-        let otra_cadena = utf8(b"Adios");
-        append(&mut cadena_utf8, otra_cadena); // Concatenando 2 cadenas.
-        print(&cadena_utf8); // Resultado: [debug] "HolaAdios"
-
-        let hex_a_utf8 = utf8(cadena_hexadecimal);
-        append(&mut cadena_utf8, hex_a_utf8); // Recuerda que puedes usar tanto bytes como hex.
-        print(&cadena_utf8); // Resultado: [debug] "HolaAdiosHello World!"
-
-        let intruso = utf8(b"INSERTAME");
-        insert(&mut cadena_utf8, 4, intruso); // Insertando una cadena.
-        print(&cadena_utf8); // Resultado: [debug] "HolaINSERTAMEAdiosHello World!"
-
-        let escape = utf8(b"\nEsto se imprimira en una nueva linea.");
-        append(&mut cadena_utf8, escape);
-        print(&cadena_utf8); // Resultado: [debug] "HolaINSERTAMEAdiosHello World!
-                                              //            Esto se imprimira en una nueva linea."
-
-        // String utils
-        let numero = 100u16; // Podemos convertir variables a cadenas.
-        print(&to_string<u16>(&numero)); // Resultado: [debug] "100" Nota que se imprime como cadena, y no como numero.
-
-        let v: vector<u16> = vector[10, 20, 30]; // Tambien podemos convertir cosas mas complejas
-        print(&debug_string(&v)); // Resultado: [debug] "[ 10, 20, 30 ]" Nota: No funciona con u8.
 
         // Recuerda que puedes obtener informacion sobre las demos operaciones en:
         // https://github.com/aptos-labs/aptos-core/blob/main/aptos-move/framework/move-stdlib/doc/string.md

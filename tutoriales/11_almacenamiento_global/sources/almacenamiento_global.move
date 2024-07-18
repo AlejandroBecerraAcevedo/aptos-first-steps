@@ -4,6 +4,20 @@
 module cuenta::almacenamiento_global {
     use std::signer; // Global Storage trabaja sobre el signer y address como vimos anteriormente.
 
+    /*
+        Reto
+
+        En base al ejemplo del contador, modifica el struct para almacenar mas campos
+        * Los nuevos campos pueden ser del tipo que quieras, experimenta.
+        * Al menos 3 campos.
+        * Cada uno de los campos debe tener al menos una funcion para modificarlo.
+        * No es necesario dejar los comentarios de la documentacion, ya que estos toman mucho espacio.
+    */
+
+
+
+
+
     struct Contador has key { valor: u64 } // Creamos un tipo personalizado llamado Contador para almacenar un valor dentro de nuestro contador.
     // Dado a que va a ser utilizado para operaciones con el global storage es necesario que tenga la habilidad key.
 
